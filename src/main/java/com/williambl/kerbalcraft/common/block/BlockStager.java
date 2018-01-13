@@ -27,35 +27,36 @@ public class BlockStager extends Block {
     }
 
     @Override
-    /**
-     * Called after the block is set in the Chunk data, but before the Tile Entity is set
-     */
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
-        Connection connection = null;
-        try {
-            connection = Connection.newInstance();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        KRPC krpc = KRPC.newInstance(connection);
-        try {
-            System.out.println("Connected to kRPC version " + krpc.getStatus().getVersion());
+        if (!worldIn.isRemote) {
+            if (worldIn.isBlockPowered(pos)) {
+                Connection connection = null;
+                try {
+                    connection = Connection.newInstance();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                KRPC krpc = KRPC.newInstance(connection);
+                try {
+                    System.out.println("Connected to kRPC version " + krpc.getStatus().getVersion());
 
-            SpaceCenter spaceCenter = SpaceCenter.newInstance(connection);
-            SpaceCenter.Vessel vessel = null;
+                    SpaceCenter spaceCenter = SpaceCenter.newInstance(connection);
+                    SpaceCenter.Vessel vessel = null;
 
-            vessel = spaceCenter.getActiveVessel();
+                    vessel = spaceCenter.getActiveVessel();
 
-            vessel.getControl().activateNextStage();
+                    vessel.getControl().activateNextStage();
 
-        } catch (RPCException e) {
-            e.printStackTrace();
-        }
-        try {
-            connection.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+                } catch (RPCException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    connection.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
