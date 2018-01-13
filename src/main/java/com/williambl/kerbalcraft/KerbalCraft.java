@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = KerbalCraft.MODID, version = KerbalCraft.VERSION)
 public class KerbalCraft {
 
-	@Mod.Instance("KerbalCraft")
+	@Mod.Instance("kerbalcraft")
 	public static KerbalCraft instance;
 
     public static final String MODID = "kerbalcraft";
