@@ -3,6 +3,7 @@ package com.williambl.kerbalcraft.common.block;
 import krpc.client.Connection;
 import krpc.client.RPCException;
 import krpc.client.services.KRPC;
+import krpc.client.services.SpaceCenter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -40,6 +41,14 @@ public class BlockStager extends Block {
         KRPC krpc = KRPC.newInstance(connection);
         try {
             System.out.println("Connected to kRPC version " + krpc.getStatus().getVersion());
+
+            SpaceCenter spaceCenter = SpaceCenter.newInstance(connection);
+            SpaceCenter.Vessel vessel = null;
+
+            vessel = spaceCenter.getActiveVessel();
+
+            vessel.getControl().activateNextStage();
+
         } catch (RPCException e) {
             e.printStackTrace();
         }
