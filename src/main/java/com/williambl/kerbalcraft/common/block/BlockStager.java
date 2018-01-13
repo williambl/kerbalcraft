@@ -1,0 +1,54 @@
+package com.williambl.kerbalcraft.common.block;
+
+import krpc.client.Connection;
+import krpc.client.RPCException;
+import krpc.client.services.KRPC;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.io.IOException;
+
+public class BlockStager extends Block {
+
+
+    public BlockStager(String registryName, Material material, MapColor mapColor, float hardness, float resistance) {
+        super(material, mapColor);
+        this.setCreativeTab(CreativeTabs.REDSTONE);
+        this.setHardness(hardness);
+        this.setResistance(resistance);
+        this.setRegistryName(registryName);
+        this.setUnlocalizedName(this.getRegistryName().toString());
+    }
+
+    @Override
+    /**
+     * Called after the block is set in the Chunk data, but before the Tile Entity is set
+     */
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+    {
+        Connection connection = null;
+        try {
+            connection = Connection.newInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        KRPC krpc = KRPC.newInstance(connection);
+        try {
+            System.out.println("Connected to kRPC version " + krpc.getStatus().getVersion());
+        } catch (RPCException e) {
+            e.printStackTrace();
+        }
+        try {
+            connection.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+}

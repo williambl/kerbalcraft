@@ -2,6 +2,8 @@ package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.KerbalCraft;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +19,12 @@ import java.util.Set;
 
 public class ModBlocks {
 
+	public static BlockStager STAGER;
+
+	public static void AddBlocks () {
+		STAGER = new BlockStager("stager", Material.IRON, MapColor.BLACK, 3, 5);
+	}
+
 	@Mod.EventBusSubscriber
 	public static class RegistrationHandler {
 
@@ -29,9 +37,10 @@ public class ModBlocks {
 		 */
 		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event) {
+			AddBlocks();
 			final IForgeRegistry<Block> registry = event.getRegistry();
 
-			event.getRegistry().registerAll();
+			event.getRegistry().registerAll(STAGER);
 		}
 
 		/**
@@ -42,7 +51,7 @@ public class ModBlocks {
 		@SubscribeEvent
 		public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
 
-			final ItemBlock[] items = {};
+			final ItemBlock[] items = { new ItemBlock(STAGER)};
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
 
