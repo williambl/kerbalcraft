@@ -1,5 +1,6 @@
 package com.williambl.kerbalcraft.common.block;
 
+import com.williambl.kerbalcraft.KerbalCraft;
 import krpc.client.Connection;
 import krpc.client.RPCException;
 import krpc.client.services.KRPC;
@@ -42,29 +43,11 @@ public class BlockStager extends Block {
             }
             if (worldIn.isBlockPowered(pos)) {
                 worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)));
-                Connection connection = null;
+
                 try {
-                    connection = Connection.newInstance();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                KRPC krpc = KRPC.newInstance(connection);
-                try {
-                    System.out.println("Connected to kRPC version " + krpc.getStatus().getVersion());
-
-                    SpaceCenter spaceCenter = SpaceCenter.newInstance(connection);
-                    SpaceCenter.Vessel vessel = null;
-
-                    vessel = spaceCenter.getActiveVessel();
-
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                     vessel.getControl().activateNextStage();
-
                 } catch (RPCException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    connection.close();
-                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
