@@ -17,53 +17,19 @@ import net.minecraft.world.World;
 
 import java.io.IOException;
 
-public class BlockStager extends Block {
+public class BlockStager extends KCBlock {
 
-    public static final PropertyBool POWERED = PropertyBool.create("powered");
-
-    public BlockStager(String registryName, Material material, MapColor mapColor, float hardness, float resistance) {
-        super(material, mapColor);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));
-        this.setCreativeTab(CreativeTabs.REDSTONE);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-        this.setRegistryName(registryName);
-        this.setUnlocalizedName(this.getRegistryName().toString());
+    public BlockStager(String registryName, MapColor mapColor) {
+        super(registryName, mapColor);
     }
 
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        if (!worldIn.isRemote) {
-            if (state.getValue(POWERED).booleanValue()) {
-                if (worldIn.isBlockPowered(pos))
-                    return;
-                else
-                    worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(false)));
-            }
-            if (worldIn.isBlockPowered(pos)) {
-                worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)));
-
-                try {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
-                    vessel.getControl().activateNextStage();
-                } catch (RPCException e) {
-                    e.printStackTrace();
-                }
-            }
+    public void runRPC () {
+        try {
+            SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+            vessel.getControl().activateNextStage();
+        } catch (RPCException e) {
+            e.printStackTrace();
         }
     }
 
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, POWERED);
-    }
-
-
-    public int getMetaFromState(IBlockState state) {
-        if (((Boolean)state.getValue(POWERED)).booleanValue())
-            return 1;
-        return 0;
-    }
 }

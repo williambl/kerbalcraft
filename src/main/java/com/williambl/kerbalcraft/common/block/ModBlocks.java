@@ -22,7 +22,7 @@ public class ModBlocks {
 	public static BlockStager STAGER;
 
 	public static void AddBlocks () {
-		STAGER = new BlockStager("stager", Material.IRON, MapColor.BLACK, 3, 5);
+		STAGER = new BlockStager("stager", MapColor.BLACK);
 	}
 
 	@Mod.EventBusSubscriber
