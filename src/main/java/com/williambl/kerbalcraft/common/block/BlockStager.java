@@ -23,7 +23,10 @@ public class BlockStager extends KCBlock {
         super(registryName, mapColor);
     }
 
-    public void runRPC () {
+    public void runRPC (int power) {
+        if (power == 0)
+            return;
+
         try {
             SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
             vessel.getControl().activateNextStage();
