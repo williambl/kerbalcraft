@@ -27,6 +27,7 @@ public class ModBlocks {
 	public static BlockLightActivator LIGHT_ACTIVATOR;
 	public static BlockBrakeActivator BRAKE_ACTIVATOR;
 	public static BlockAborter ABORTER;
+	public static BlockThrottleSetter THROTTLE_SETTER;
 	public static BlockActionGroupActivator[] ACTION_GROUP_ACTIVATORS = new BlockActionGroupActivator[10];
 
 	public static void AddBlocks () {
@@ -37,6 +38,7 @@ public class ModBlocks {
 		LIGHT_ACTIVATOR = new BlockLightActivator("light_activator", MapColor.BLACK);
 		BRAKE_ACTIVATOR = new BlockBrakeActivator("brake_activator", MapColor.BLACK);
 		ABORTER = new BlockAborter("aborter", MapColor.BLACK);
+		THROTTLE_SETTER = new BlockThrottleSetter("throttle_setter", MapColor.BLACK);
 
 		for (int i = 0; i < 10; i++) {
 			ACTION_GROUP_ACTIVATORS[i] = new BlockActionGroupActivator("action_group_activator_" + i, MapColor.BLACK, i);
@@ -66,7 +68,8 @@ public class ModBlocks {
 					GEAR_ACTIVATOR,
 					LIGHT_ACTIVATOR,
 					BRAKE_ACTIVATOR,
-					ABORTER
+					ABORTER,
+					THROTTLE_SETTER
 			);
 			event.getRegistry().registerAll(ACTION_GROUP_ACTIVATORS);
 		}
@@ -86,7 +89,8 @@ public class ModBlocks {
 					new ItemBlock(GEAR_ACTIVATOR),
 					new ItemBlock(LIGHT_ACTIVATOR),
 					new ItemBlock(BRAKE_ACTIVATOR),
-					new ItemBlock(ABORTER)
+					new ItemBlock(ABORTER),
+					new ItemBlock(THROTTLE_SETTER)
 			};
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
