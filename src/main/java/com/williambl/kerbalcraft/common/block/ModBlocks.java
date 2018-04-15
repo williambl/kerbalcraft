@@ -15,14 +15,21 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ModBlocks {
 
 	public static BlockStager STAGER;
+	public static BlockActionGroupActivator[] ACTION_GROUP_ACTIVATORS = new BlockActionGroupActivator[10];
 
 	public static void AddBlocks () {
 		STAGER = new BlockStager("stager", MapColor.BLACK);
+
+		for (int i = 0; i < 10; i++) {
+			ACTION_GROUP_ACTIVATORS[i] = new BlockActionGroupActivator("action_group_activator_" + i, MapColor.BLACK, i);
+			System.out.println(ACTION_GROUP_ACTIVATORS[i]);
+		}
 	}
 
 	@Mod.EventBusSubscriber
@@ -40,7 +47,10 @@ public class ModBlocks {
 			AddBlocks();
 			final IForgeRegistry<Block> registry = event.getRegistry();
 
-			event.getRegistry().registerAll(STAGER);
+			event.getRegistry().registerAll(
+					STAGER
+			);
+			event.getRegistry().registerAll(ACTION_GROUP_ACTIVATORS);
 		}
 
 		/**
@@ -51,12 +61,20 @@ public class ModBlocks {
 		@SubscribeEvent
 		public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
 
-			final ItemBlock[] items = { new ItemBlock(STAGER)};
+			final ItemBlock[] items = {
+					new ItemBlock(STAGER)
+			};
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
 
 			for (final ItemBlock item : items) {
 				registry.register(item.setRegistryName(item.getBlock().getRegistryName()));
+				ITEM_BLOCKS.add(item);
+			}
+
+			for (BlockActionGroupActivator block : ACTION_GROUP_ACTIVATORS) {
+				final ItemBlock item = (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
+				registry.register(item);
 				ITEM_BLOCKS.add(item);
 			}
 		}
