@@ -21,10 +21,22 @@ import java.util.Set;
 public class ModBlocks {
 
 	public static BlockStager STAGER;
+	public static BlockSASActivator SAS_ACTIVATOR;
+	public static BlockRCSActivator RCS_ACTIVATOR;
+	public static BlockGearActivator GEAR_ACTIVATOR;
+	public static BlockLightActivator LIGHT_ACTIVATOR;
+	public static BlockBrakeActivator BRAKE_ACTIVATOR;
+	public static BlockAborter ABORTER;
 	public static BlockActionGroupActivator[] ACTION_GROUP_ACTIVATORS = new BlockActionGroupActivator[10];
 
 	public static void AddBlocks () {
 		STAGER = new BlockStager("stager", MapColor.BLACK);
+		SAS_ACTIVATOR = new BlockSASActivator("sas_activator", MapColor.BLACK);
+		RCS_ACTIVATOR = new BlockRCSActivator("rcs_activator", MapColor.BLACK);
+		GEAR_ACTIVATOR = new BlockGearActivator("gear_activator", MapColor.BLACK);
+		LIGHT_ACTIVATOR = new BlockLightActivator("light_activator", MapColor.BLACK);
+		BRAKE_ACTIVATOR = new BlockBrakeActivator("brake_activator", MapColor.BLACK);
+		ABORTER = new BlockAborter("aborter", MapColor.BLACK);
 
 		for (int i = 0; i < 10; i++) {
 			ACTION_GROUP_ACTIVATORS[i] = new BlockActionGroupActivator("action_group_activator_" + i, MapColor.BLACK, i);
@@ -48,7 +60,13 @@ public class ModBlocks {
 			final IForgeRegistry<Block> registry = event.getRegistry();
 
 			event.getRegistry().registerAll(
-					STAGER
+					STAGER,
+					SAS_ACTIVATOR,
+					RCS_ACTIVATOR,
+					GEAR_ACTIVATOR,
+					LIGHT_ACTIVATOR,
+					BRAKE_ACTIVATOR,
+					ABORTER
 			);
 			event.getRegistry().registerAll(ACTION_GROUP_ACTIVATORS);
 		}
@@ -62,7 +80,13 @@ public class ModBlocks {
 		public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
 
 			final ItemBlock[] items = {
-					new ItemBlock(STAGER)
+					new ItemBlock(STAGER),
+					new ItemBlock(SAS_ACTIVATOR),
+					new ItemBlock(RCS_ACTIVATOR),
+					new ItemBlock(GEAR_ACTIVATOR),
+					new ItemBlock(LIGHT_ACTIVATOR),
+					new ItemBlock(BRAKE_ACTIVATOR),
+					new ItemBlock(ABORTER)
 			};
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
