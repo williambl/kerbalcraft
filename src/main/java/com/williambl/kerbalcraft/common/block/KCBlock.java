@@ -40,11 +40,11 @@ public class KCBlock extends Block {
             if (worldIn.isBlockPowered(pos)) {
                 worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.TRUE));
             }
-            runRPC(worldIn.getStrongPower(pos));
+            runRPC(state, worldIn, pos, blockIn, fromPos);
         }
     }
 
-    public void runRPC (int power) {
+    public void runRPC (IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
     }
 
 

@@ -23,7 +23,9 @@ public class BlockStager extends KCBlock {
         super(registryName, mapColor);
     }
 
-    public void runRPC (int power) {
+    @Override
+    public void runRPC (IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        int power = worldIn.getStrongPower(pos);
         if (power == 0)
             return;
 
