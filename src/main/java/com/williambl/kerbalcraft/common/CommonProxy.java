@@ -19,6 +19,7 @@ public class CommonProxy {
             KerbalCraft.rpcConn = Connection.newInstance();
         } catch (IOException e) {
             e.printStackTrace();
+            return;
         }
         KerbalCraft.krpc = KRPC.newInstance(KerbalCraft.rpcConn);
         try {
