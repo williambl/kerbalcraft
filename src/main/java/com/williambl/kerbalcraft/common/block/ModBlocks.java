@@ -1,6 +1,7 @@
 package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.IEffector;
+import com.williambl.kerbalcraft.IIndicator;
 import com.williambl.kerbalcraft.KerbalCraft;
 import krpc.client.RPCException;
 import krpc.client.services.SpaceCenter;
@@ -10,7 +11,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -34,7 +37,14 @@ public class ModBlocks {
 	public static BlockEffector THROTTLE_SETTER;
 	public static BlockEffector[] ACTION_GROUP_ACTIVATORS = new BlockEffector[10];
 
-	public static void AddBlocks () {
+	public static BlockIndicator SAS_INDICATOR;
+	public static BlockIndicator RCS_INDICATOR;
+	public static BlockIndicator GEAR_INDICATOR;
+	public static BlockIndicator LIGHT_INDICATOR;
+	public static BlockIndicator BRAKE_INDICATOR;
+
+
+	public static void AddEffectors () {
 		STAGER = new BlockEffector("stager", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
 			int power = worldIn.getStrongPower(pos);
 			if (power == 0) return;
@@ -131,6 +141,79 @@ public class ModBlocks {
 		}
 	}
 
+	public static void AddIndicators () {
+		SAS_INDICATOR = new BlockIndicator("sas_indicator", MapColor.BLACK, new IIndicator() {
+			@Override
+			public int runRPCGet(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side, boolean strongPower) {
+				try {
+					SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+					return vessel.getControl().getSAS() ? 0 : 1;
+				} catch (RPCException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		});
+
+		RCS_INDICATOR = new BlockIndicator("rcs_indicator", MapColor.BLACK, new IIndicator() {
+			@Override
+			public int runRPCGet(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side, boolean strongPower) {
+				try {
+					SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+					return vessel.getControl().getRCS() ? 0 : 1;
+				} catch (RPCException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		});
+
+		GEAR_INDICATOR = new BlockIndicator("gear_indicator", MapColor.BLACK, new IIndicator() {
+			@Override
+			public int runRPCGet(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side, boolean strongPower) {
+				try {
+					SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+					return vessel.getControl().getGear() ? 0 : 1;
+				} catch (RPCException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		});
+
+		LIGHT_INDICATOR = new BlockIndicator("light_indicator", MapColor.BLACK, new IIndicator() {
+			@Override
+			public int runRPCGet(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side, boolean strongPower) {
+				try {
+					SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+					return vessel.getControl().getLights() ? 0 : 1;
+				} catch (RPCException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		});
+
+		BRAKE_INDICATOR = new BlockIndicator("brake_indicator", MapColor.BLACK, new IIndicator() {
+			@Override
+			public int runRPCGet(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side, boolean strongPower) {
+				try {
+					SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+					return vessel.getControl().getBrakes() ? 0 : 1;
+				} catch (RPCException e) {
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		});
+
+	}
+
+	public static void AddBlocks () {
+		AddEffectors();
+		AddIndicators();
+	}
+
 	@Mod.EventBusSubscriber
 	public static class RegistrationHandler {
 
@@ -157,6 +240,14 @@ public class ModBlocks {
 					THROTTLE_SETTER
 			);
 			event.getRegistry().registerAll(ACTION_GROUP_ACTIVATORS);
+
+			event.getRegistry().registerAll(
+					SAS_INDICATOR,
+					RCS_INDICATOR,
+					GEAR_INDICATOR,
+					LIGHT_INDICATOR,
+					BRAKE_INDICATOR
+			);
 		}
 
 		/**
@@ -175,7 +266,13 @@ public class ModBlocks {
 					new ItemBlock(LIGHT_ACTIVATOR),
 					new ItemBlock(BRAKE_ACTIVATOR),
 					new ItemBlock(ABORTER),
-					new ItemBlock(THROTTLE_SETTER)
+					new ItemBlock(THROTTLE_SETTER),
+
+					new ItemBlock(SAS_INDICATOR),
+					new ItemBlock(RCS_INDICATOR),
+					new ItemBlock(GEAR_INDICATOR),
+					new ItemBlock(LIGHT_INDICATOR),
+					new ItemBlock(BRAKE_INDICATOR)
 			};
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
