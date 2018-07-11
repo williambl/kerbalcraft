@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockBrakeActivator extends KCBlock {
+public class BlockBrakeActivator extends BlockEffector {
 
     public BlockBrakeActivator(String registryName, MapColor mapColor) {
         super(registryName, mapColor);

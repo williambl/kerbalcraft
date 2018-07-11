@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockSASActivator extends KCBlock {
+public class BlockSASActivator extends BlockEffector {
 
     public BlockSASActivator(String registryName, MapColor mapColor) {
         super(registryName, mapColor);

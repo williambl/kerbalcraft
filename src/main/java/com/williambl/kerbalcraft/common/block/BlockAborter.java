@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockAborter extends KCBlock {
+public class BlockAborter extends BlockEffector {
 
     public BlockAborter(String registryName, MapColor mapColor) {
         super(registryName, mapColor);

@@ -1,8 +1,5 @@
 package com.williambl.kerbalcraft.common.block;
 
-import com.williambl.kerbalcraft.KerbalCraft;
-import krpc.client.RPCException;
-import krpc.client.services.SpaceCenter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -15,11 +12,8 @@ import net.minecraft.world.World;
 
 public class KCBlock extends Block {
 
-    public static final PropertyBool POWERED = PropertyBool.create("powered");
-
     public KCBlock(String registryName, MapColor mapColor) {
         super(Material.IRON, mapColor);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, Boolean.FALSE));
         this.setCreativeTab(CreativeTabs.REDSTONE);
         this.setHardness(3);
         this.setResistance(5);
@@ -27,36 +21,4 @@ public class KCBlock extends Block {
         this.setUnlocalizedName(this.getRegistryName().toString());
     }
 
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        if (!worldIn.isRemote) {
-            if (state.getValue(POWERED)) {
-                if (worldIn.isBlockPowered(pos))
-                    return;
-                else
-                    worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.FALSE));
-            }
-            if (worldIn.isBlockPowered(pos)) {
-                worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.TRUE));
-            }
-            runRPC(state, worldIn, pos, blockIn, fromPos);
-        }
-    }
-
-    public void runRPC (IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-    }
-
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, POWERED);
-    }
-
-
-    public int getMetaFromState(IBlockState state) {
-        if (((Boolean)state.getValue(POWERED)).booleanValue())
-            return 1;
-        return 0;
-    }
 }

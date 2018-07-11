@@ -9,7 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockThrottleSetter extends KCBlock {
+public class BlockThrottleSetter extends BlockEffector {
 
     public BlockThrottleSetter(String registryName, MapColor mapColor) {
         super(registryName, mapColor);
