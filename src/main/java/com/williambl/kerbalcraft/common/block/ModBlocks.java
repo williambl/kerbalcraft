@@ -296,6 +296,20 @@ public class ModBlocks {
 		 */
 		@SubscribeEvent
 		public static void registerItemBlockModels(ModelRegistryEvent event) {
+			STAGER.initModel();
+			SAS_ACTIVATOR.initModel();
+			RCS_ACTIVATOR.initModel();
+			GEAR_ACTIVATOR.initModel();
+			LIGHT_ACTIVATOR.initModel();
+			BRAKE_ACTIVATOR.initModel();
+			ABORTER.initModel();
+			THROTTLE_SETTER.initModel();
+
+			SAS_INDICATOR.initModel();
+			RCS_INDICATOR.initModel();
+			GEAR_INDICATOR.initModel();
+			LIGHT_INDICATOR.initModel();
+			BRAKE_INDICATOR.initModel();
 		}
 
 		public static void registerTileEntities() {
