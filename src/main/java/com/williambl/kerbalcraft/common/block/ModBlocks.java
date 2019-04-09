@@ -1,18 +1,13 @@
 package com.williambl.kerbalcraft.common.block;
 
-import com.williambl.kerbalcraft.IIndicator;
 import com.williambl.kerbalcraft.KerbalCraft;
 import krpc.client.RPCException;
 import krpc.client.services.SpaceCenter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -58,7 +53,7 @@ public class ModBlocks {
     public static BlockIndicator BRAKE_INDICATOR;
 
 
-    static Block[] AddEffectors() {
+    private static Block[] AddEffectors() {
         Block[] effectors = new Block[]{
 
                 new BlockEffector("stager", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
@@ -160,7 +155,7 @@ public class ModBlocks {
 
     }
 
-    public static Block[] AddIndicators() {
+    private static Block[] AddIndicators() {
         Block[] indicators = new Block[]{
                 new BlockIndicator("sas_indicator", MapColor.BLACK, (state, blockAccess, pos, side, strongPower) -> {
                     try {
@@ -216,7 +211,7 @@ public class ModBlocks {
 
     }
 
-    static Block[] AddBlocks() {
+    private static Block[] AddBlocks() {
         return ArrayUtils.addAll(AddEffectors(), AddIndicators());
     }
 
