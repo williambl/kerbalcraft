@@ -2,7 +2,6 @@ package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.IIndicator;
 import com.williambl.kerbalcraft.common.tileentity.TileEntityIndicator;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,8 +18,8 @@ public class BlockIndicator extends KCTileEntityProviderBlock {
     public IIndicator iIndicator;
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
-    public BlockIndicator(String registryName, MapColor mapColor, IIndicator iIndicatorIn) {
-        super(registryName, mapColor);
+    public BlockIndicator(String registryName, IIndicator iIndicatorIn) {
+        super(registryName);
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, Boolean.FALSE));
         iIndicator = iIndicatorIn;
     }

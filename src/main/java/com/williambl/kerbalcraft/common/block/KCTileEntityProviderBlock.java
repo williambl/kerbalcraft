@@ -1,7 +1,6 @@
 package com.williambl.kerbalcraft.common.block;
 
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -11,8 +10,8 @@ import javax.annotation.Nullable;
 
 public abstract class KCTileEntityProviderBlock extends KCBlock implements ITileEntityProvider {
 
-    public KCTileEntityProviderBlock(String registryName, MapColor mapColor) {
-        super(registryName, mapColor);
+    public KCTileEntityProviderBlock(String registryName) {
+        super(registryName);
         this.hasTileEntity = true;
     }
 

@@ -5,7 +5,6 @@ import com.williambl.kerbalcraft.common.tileentity.TileEntityIndicator;
 import krpc.client.RPCException;
 import krpc.client.services.SpaceCenter;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -72,7 +71,7 @@ public class ModBlocks {
     private static Block[] AddEffectors() {
         Block[] effectors = new Block[]{
 
-                new BlockEffector("stager", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("stager", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     if (power == 0) return;
                     try {
@@ -83,7 +82,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("sas_activator", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("sas_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -93,7 +92,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("rcs_activator", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("rcs_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -103,7 +102,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("gear_activator", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("gear_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -113,7 +112,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("light_activator", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("light_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -123,7 +122,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("brake_activator", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("brake_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -133,7 +132,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("aborter", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("aborter", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -143,7 +142,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("throttle_setter", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("throttle_setter", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -153,7 +152,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("yaw_left_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("yaw_left_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -163,7 +162,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("yaw_right_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("yaw_right_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -173,7 +172,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("pitch_down_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("pitch_down_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -183,7 +182,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("pitch_up_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("pitch_up_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -193,7 +192,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("roll_left_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("roll_left_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -203,7 +202,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockEffector("roll_right_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                new BlockEffector("roll_right_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -216,7 +215,7 @@ public class ModBlocks {
 
         for (int i = 0; i < 10; i++) {
             final int j = i; //Sorry, I know this looks ugly, but it's needed in order for the lambda below to work
-            ACTION_GROUP_ACTIVATORS[i] = new BlockEffector("action_group_activator_" + i, MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+            ACTION_GROUP_ACTIVATORS[i] = new BlockEffector("action_group_activator_" + i, (state, worldIn, pos, blockIn, fromPos) -> {
                 int power = worldIn.getStrongPower(pos);
                 try {
                     SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
@@ -234,7 +233,7 @@ public class ModBlocks {
 
     private static Block[] AddIndicators() {
         Block[] indicators = new Block[]{
-                new BlockIndicator("sas_indicator", MapColor.BLACK, (state, world, pos) -> {
+                new BlockIndicator("sas_indicator", (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                         return vessel.getControl().getSAS();
@@ -244,7 +243,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockIndicator("rcs_indicator", MapColor.BLACK, (state, world, pos) -> {
+                new BlockIndicator("rcs_indicator", (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                         return vessel.getControl().getRCS();
@@ -254,7 +253,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockIndicator("gear_indicator", MapColor.BLACK, (state, world, pos) -> {
+                new BlockIndicator("gear_indicator", (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                         return vessel.getControl().getGear();
@@ -264,7 +263,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockIndicator("light_indicator", MapColor.BLACK, (state, world, pos) -> {
+                new BlockIndicator("light_indicator", (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                         return vessel.getControl().getLights();
@@ -274,7 +273,7 @@ public class ModBlocks {
                     }
                 }),
 
-                new BlockIndicator("brake_indicator", MapColor.BLACK, (state, world, pos) -> {
+                new BlockIndicator("brake_indicator", (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                         return vessel.getControl().getBrakes();

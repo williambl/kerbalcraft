@@ -2,7 +2,6 @@ package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.IEffector;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,8 +16,8 @@ public class BlockEffector extends KCBlock {
 
     public IEffector iEffector;
 
-    public BlockEffector(String registryName, MapColor mapColor, IEffector iEffectorIn) {
-        super(registryName, mapColor);
+    public BlockEffector(String registryName, IEffector iEffectorIn) {
+        super(registryName);
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, Boolean.FALSE));
         iEffector = iEffectorIn;
     }
