@@ -1,17 +1,11 @@
 package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.IEffector;
-import com.williambl.kerbalcraft.KerbalCraft;
-import krpc.client.RPCException;
-import krpc.client.services.SpaceCenter;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -53,8 +47,12 @@ public class BlockEffector extends KCBlock {
     }
 
     public int getMetaFromState(IBlockState state) {
-        if (state.getValue(POWERED))
-            return 1;
-        return 0;
+        return (state.getValue(POWERED)) ? 1 : 0;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return getDefaultState().withProperty(POWERED, meta == 1);
     }
 }
