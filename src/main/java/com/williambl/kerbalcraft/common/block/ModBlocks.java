@@ -1,6 +1,7 @@
 package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.KerbalCraft;
+import com.williambl.kerbalcraft.common.tileentity.TileEntityIndicator;
 import krpc.client.RPCException;
 import krpc.client.services.SpaceCenter;
 import net.minecraft.block.Block;
@@ -233,53 +234,53 @@ public class ModBlocks {
 
     private static Block[] AddIndicators() {
         Block[] indicators = new Block[]{
-                new BlockIndicator("sas_indicator", MapColor.BLACK, (state, blockAccess, pos, side, strongPower) -> {
+                new BlockIndicator("sas_indicator", MapColor.BLACK, (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
-                        return vessel.getControl().getSAS() ? 0 : 1;
+                        return vessel.getControl().getSAS();
                     } catch (RPCException e) {
                         e.printStackTrace();
-                        return 0;
+                        return false;
                     }
                 }),
 
-                new BlockIndicator("rcs_indicator", MapColor.BLACK, (state, blockAccess, pos, side, strongPower) -> {
+                new BlockIndicator("rcs_indicator", MapColor.BLACK, (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
-                        return vessel.getControl().getRCS() ? 0 : 1;
+                        return vessel.getControl().getRCS();
                     } catch (RPCException e) {
                         e.printStackTrace();
-                        return 0;
+                        return false;
                     }
                 }),
 
-                new BlockIndicator("gear_indicator", MapColor.BLACK, (state, blockAccess, pos, side, strongPower) -> {
+                new BlockIndicator("gear_indicator", MapColor.BLACK, (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
-                        return vessel.getControl().getGear() ? 0 : 1;
+                        return vessel.getControl().getGear();
                     } catch (RPCException e) {
                         e.printStackTrace();
-                        return 0;
+                        return false;
                     }
                 }),
 
-                new BlockIndicator("light_indicator", MapColor.BLACK, (state, blockAccess, pos, side, strongPower) -> {
+                new BlockIndicator("light_indicator", MapColor.BLACK, (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
-                        return vessel.getControl().getLights() ? 0 : 1;
+                        return vessel.getControl().getLights();
                     } catch (RPCException e) {
                         e.printStackTrace();
-                        return 0;
+                        return false;
                     }
                 }),
 
-                new BlockIndicator("brake_indicator", MapColor.BLACK, (state, blockAccess, pos, side, strongPower) -> {
+                new BlockIndicator("brake_indicator", MapColor.BLACK, (state, world, pos) -> {
                     try {
                         SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
-                        return vessel.getControl().getBrakes() ? 0 : 1;
+                        return vessel.getControl().getBrakes();
                     } catch (RPCException e) {
                         e.printStackTrace();
-                        return 0;
+                        return false;
                     }
                 })};
 
@@ -386,6 +387,7 @@ public class ModBlocks {
         }
 
         public static void registerTileEntities() {
+            registerTileEntity(TileEntityIndicator.class);
         }
 
         private static void registerTileEntity(Class<? extends TileEntity> tileEntityClass) {
