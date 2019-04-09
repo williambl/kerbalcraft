@@ -62,6 +62,24 @@ public class ModBlocks {
     public static BlockIndicator LIGHT_INDICATOR;
     @GameRegistry.ObjectHolder("brake_indicator")
     public static BlockIndicator BRAKE_INDICATOR;
+    @GameRegistry.ObjectHolder("comms_indicator")
+    public static BlockIndicator COMMS_INDICATOR;
+    @GameRegistry.ObjectHolder("orbit_indicator")
+    public static BlockIndicator ORBIT_INDICATOR;
+    @GameRegistry.ObjectHolder("descending_indicator")
+    public static BlockIndicator DESCENDING_INDICATOR;
+    @GameRegistry.ObjectHolder("liquidfuel_indicator")
+    public static BlockIndicator LIQUIDFUEL_INDICATOR;
+    @GameRegistry.ObjectHolder("oxidiser_indicator")
+    public static BlockIndicator OXIDISER_INDICATOR;
+    @GameRegistry.ObjectHolder("monopropellant_indicator")
+    public static BlockIndicator MONOPROPELLANT_INDICATOR;
+    @GameRegistry.ObjectHolder("xenon_indicator")
+    public static BlockIndicator XENON_INDICATOR;
+    @GameRegistry.ObjectHolder("solidfuel_indicator")
+    public static BlockIndicator SOLIDFUEL_INDICATOR;
+    @GameRegistry.ObjectHolder("electriccharge_indicator")
+    public static BlockIndicator ELECTRICCHARGE_INDICATOR;
 
 
     public static BlockEffector[] ACTION_GROUP_ACTIVATORS = new BlockEffector[10];
@@ -211,7 +229,53 @@ public class ModBlocks {
                 new BlockIndicator("brake_indicator", (state, world, pos) -> {
                     SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
                     return vessel.getControl().getBrakes();
-                })};
+                }),
+
+                new BlockIndicator("comms_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getComms().getCanCommunicate();
+                }),
+
+                new BlockIndicator("orbit_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getSituation() == SpaceCenter.VesselSituation.ORBITING;
+                }),
+
+                new BlockIndicator("descending_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.flight(vessel.getReferenceFrame()).getVerticalSpeed() < 0;
+                }),
+
+                new BlockIndicator("liquidfuel_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getResources().amount("LiquidFuel") > 0;
+                }),
+
+                new BlockIndicator("oxidiser_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getResources().amount("Oxidiser") > 0;
+                }),
+
+                new BlockIndicator("monopropellant_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getResources().amount("MonoPropellant") > 0;
+                }),
+
+                new BlockIndicator("xenon_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getResources().amount("XenonGas") > 0;
+                }),
+
+                new BlockIndicator("solidfuel_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getResources().amount("SolidFuel") > 0;
+                }),
+
+                new BlockIndicator("electriccharge_indicator", (state, world, pos) -> {
+                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    return vessel.getResources().amount("ElectricCharge") > 0;
+                }),
+        };
 
         return indicators;
 
@@ -268,7 +332,16 @@ public class ModBlocks {
                     new ItemBlock(RCS_INDICATOR),
                     new ItemBlock(GEAR_INDICATOR),
                     new ItemBlock(LIGHT_INDICATOR),
-                    new ItemBlock(BRAKE_INDICATOR)
+                    new ItemBlock(BRAKE_INDICATOR),
+                    new ItemBlock(COMMS_INDICATOR),
+                    new ItemBlock(ORBIT_INDICATOR),
+                    new ItemBlock(DESCENDING_INDICATOR),
+                    new ItemBlock(LIQUIDFUEL_INDICATOR),
+                    new ItemBlock(OXIDISER_INDICATOR),
+                    new ItemBlock(MONOPROPELLANT_INDICATOR),
+                    new ItemBlock(XENON_INDICATOR),
+                    new ItemBlock(SOLIDFUEL_INDICATOR),
+                    new ItemBlock(ELECTRICCHARGE_INDICATOR)
             };
 
             final IForgeRegistry<Item> registry = event.getRegistry();
@@ -313,6 +386,15 @@ public class ModBlocks {
             GEAR_INDICATOR.initModel();
             LIGHT_INDICATOR.initModel();
             BRAKE_INDICATOR.initModel();
+            COMMS_INDICATOR.initModel();
+            ORBIT_INDICATOR.initModel();
+            DESCENDING_INDICATOR.initModel();
+            LIQUIDFUEL_INDICATOR.initModel();
+            OXIDISER_INDICATOR.initModel();
+            MONOPROPELLANT_INDICATOR.initModel();
+            XENON_INDICATOR.initModel();
+            SOLIDFUEL_INDICATOR.initModel();
+            ELECTRICCHARGE_INDICATOR.initModel();
         }
 
         public static void registerTileEntities() {
