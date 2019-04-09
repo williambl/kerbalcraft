@@ -36,10 +36,22 @@ public class ModBlocks {
     public static BlockEffector BRAKE_ACTIVATOR;
     @GameRegistry.ObjectHolder("aborter")
     public static BlockEffector ABORTER;
+
     @GameRegistry.ObjectHolder("throttle_setter")
     public static BlockEffector THROTTLE_SETTER;
+    @GameRegistry.ObjectHolder("yaw_left_steerer")
+    public static BlockEffector YAW_LEFT_STEERER;
+    @GameRegistry.ObjectHolder("yaw_right_steerer")
+    public static BlockEffector YAW_RIGHT_STEERER;
+    @GameRegistry.ObjectHolder("pitch_down_steerer")
+    public static BlockEffector PITCH_DOWN_STEERER;
+    @GameRegistry.ObjectHolder("pitch_up_steerer")
+    public static BlockEffector PITCH_UP_STEERER;
+    @GameRegistry.ObjectHolder("roll_left_steerer")
+    public static BlockEffector ROLL_LEFT_STEERER;
+    @GameRegistry.ObjectHolder("roll_right_steerer")
+    public static BlockEffector ROLL_RIGHT_STEERER;
 
-    public static BlockEffector[] ACTION_GROUP_ACTIVATORS = new BlockEffector[10];
 
     @GameRegistry.ObjectHolder("sas_indicator")
     public static BlockIndicator SAS_INDICATOR;
@@ -51,6 +63,9 @@ public class ModBlocks {
     public static BlockIndicator LIGHT_INDICATOR;
     @GameRegistry.ObjectHolder("brake_indicator")
     public static BlockIndicator BRAKE_INDICATOR;
+
+
+    public static BlockEffector[] ACTION_GROUP_ACTIVATORS = new BlockEffector[10];
 
 
     private static Block[] AddEffectors() {
@@ -135,7 +150,68 @@ public class ModBlocks {
                     } catch (RPCException e) {
                         e.printStackTrace();
                     }
-                })};
+                }),
+
+                new BlockEffector("yaw_left_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                    int power = worldIn.getStrongPower(pos);
+                    try {
+                        SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                        vessel.getControl().setYaw(-((float) power / 15));
+                    } catch (RPCException e) {
+                        e.printStackTrace();
+                    }
+                }),
+
+                new BlockEffector("yaw_right_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                    int power = worldIn.getStrongPower(pos);
+                    try {
+                        SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                        vessel.getControl().setYaw((float) power / 15);
+                    } catch (RPCException e) {
+                        e.printStackTrace();
+                    }
+                }),
+
+                new BlockEffector("pitch_down_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                    int power = worldIn.getStrongPower(pos);
+                    try {
+                        SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                        vessel.getControl().setPitch(-((float) power / 15));
+                    } catch (RPCException e) {
+                        e.printStackTrace();
+                    }
+                }),
+
+                new BlockEffector("pitch_up_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                    int power = worldIn.getStrongPower(pos);
+                    try {
+                        SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                        vessel.getControl().setPitch((float) power / 15);
+                    } catch (RPCException e) {
+                        e.printStackTrace();
+                    }
+                }),
+
+                new BlockEffector("roll_left_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                    int power = worldIn.getStrongPower(pos);
+                    try {
+                        SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                        vessel.getControl().setRoll(-((float) power / 15));
+                    } catch (RPCException e) {
+                        e.printStackTrace();
+                    }
+                }),
+
+                new BlockEffector("roll_right_steerer", MapColor.BLACK, (state, worldIn, pos, blockIn, fromPos) -> {
+                    int power = worldIn.getStrongPower(pos);
+                    try {
+                        SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                        vessel.getControl().setRoll((float) power / 15);
+                    } catch (RPCException e) {
+                        e.printStackTrace();
+                    }
+                })
+        };
 
         for (int i = 0; i < 10; i++) {
             final int j = i; //Sorry, I know this looks ugly, but it's needed in order for the lambda below to work
@@ -249,7 +325,14 @@ public class ModBlocks {
                     new ItemBlock(LIGHT_ACTIVATOR),
                     new ItemBlock(BRAKE_ACTIVATOR),
                     new ItemBlock(ABORTER),
+
                     new ItemBlock(THROTTLE_SETTER),
+                    new ItemBlock(YAW_LEFT_STEERER),
+                    new ItemBlock(YAW_RIGHT_STEERER),
+                    new ItemBlock(PITCH_DOWN_STEERER),
+                    new ItemBlock(PITCH_UP_STEERER),
+                    new ItemBlock(ROLL_LEFT_STEERER),
+                    new ItemBlock(ROLL_RIGHT_STEERER),
 
                     new ItemBlock(SAS_INDICATOR),
                     new ItemBlock(RCS_INDICATOR),
@@ -286,7 +369,14 @@ public class ModBlocks {
             LIGHT_ACTIVATOR.initModel();
             BRAKE_ACTIVATOR.initModel();
             ABORTER.initModel();
+
             THROTTLE_SETTER.initModel();
+            YAW_LEFT_STEERER.initModel();
+            YAW_RIGHT_STEERER.initModel();
+            PITCH_DOWN_STEERER.initModel();
+            PITCH_UP_STEERER.initModel();
+            ROLL_LEFT_STEERER.initModel();
+            ROLL_RIGHT_STEERER.initModel();
 
             SAS_INDICATOR.initModel();
             RCS_INDICATOR.initModel();
