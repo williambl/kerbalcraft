@@ -1,6 +1,7 @@
 package com.williambl.kerbalcraft.common.block;
 
 import com.williambl.kerbalcraft.IEffector;
+import krpc.client.RPCException;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -35,7 +36,12 @@ public class BlockEffector extends KCBlock {
             if (worldIn.isBlockPowered(pos)) {
                 worldIn.setBlockState(pos, state.withProperty(POWERED, Boolean.TRUE));
             }
-            iEffector.runRPC(state, worldIn, pos, blockIn, fromPos);
+
+            try {
+                iEffector.runRPC(state, worldIn, pos, blockIn, fromPos);
+            } catch (RPCException e) {
+                e.printStackTrace();
+            }
         }
     }
 
