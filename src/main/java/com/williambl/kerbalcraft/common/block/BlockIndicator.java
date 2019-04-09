@@ -16,10 +16,14 @@ public class BlockIndicator extends KCBlock {
         iIndicator = iindicatorIn;
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
     public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return iIndicator.runRPCGet(blockState, blockAccess, pos, side, false);
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
     public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return iIndicator.runRPCGet(blockState, blockAccess, pos, side, true);
     }

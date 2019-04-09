@@ -4,6 +4,7 @@ import com.williambl.kerbalcraft.IEffector;
 import com.williambl.kerbalcraft.KerbalCraft;
 import krpc.client.RPCException;
 import krpc.client.services.SpaceCenter;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -13,6 +14,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockEffector extends KCBlock {
 
@@ -26,9 +29,9 @@ public class BlockEffector extends KCBlock {
         iEffector = iEffectorIn;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         if (!worldIn.isRemote) {
             if (state.getValue(POWERED)) {
                 if (worldIn.isBlockPowered(pos))
@@ -43,13 +46,14 @@ public class BlockEffector extends KCBlock {
         }
     }
 
-    protected BlockStateContainer createBlockState()
-    {
+    @Override
+    @Nonnull
+    protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, POWERED);
     }
 
     public int getMetaFromState(IBlockState state) {
-        if (((Boolean)state.getValue(POWERED)).booleanValue())
+        if (state.getValue(POWERED))
             return 1;
         return 0;
     }
