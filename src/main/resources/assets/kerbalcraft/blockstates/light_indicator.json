@@ -2,13 +2,22 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "kerbalcraft:blocks/block"
+      "all": "kerbalcraft:blocks/light_indicator_unpowered"
     },
     "model": "cube_all",
     "uvlock": true
   },
   "variants": {
     "normal": [{}],
+    "powered": {
+      "true": {
+        "textures": {
+          "all": "kerbalcraft:blocks/light_indicator_powered"
+        }
+      },
+      "false": {}
+    },
     "inventory": [{}]
   }
 }
+            

@@ -2,22 +2,26 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "kerbalcraft:blocks/gear_indicator_unpowered"
+      "all": "kerbalcraft:blocks/monopropellant_indicator_unpowered"
     },
     "model": "cube_all",
     "uvlock": true
   },
   "variants": {
-    "normal": [{}],
+    "normal": [
+      {}
+    ],
     "powered": {
       "true": {
         "textures": {
-          "all": "kerbalcraft:blocks/gear_indicator_powered"
+          "all": "kerbalcraft:blocks/monopropellant_indicator_powered"
         }
       },
       "false": {}
     },
-    "inventory": [{}]
+    "inventory": [
+      {}
+    ]
   }
 }
             
