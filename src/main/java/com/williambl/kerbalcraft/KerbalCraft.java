@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = KerbalCraft.MODID, version = KerbalCraft.VERSION)
 public class KerbalCraft {
@@ -45,4 +46,8 @@ public class KerbalCraft {
     	proxy.postInit();
 	}
 
+	@EventHandler
+	public void serverStart(FMLServerStartingEvent event) {
+		proxy.serverStart(event);
+	}
 }
