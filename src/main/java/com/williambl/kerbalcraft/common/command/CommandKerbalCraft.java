@@ -1,5 +1,8 @@
 package com.williambl.kerbalcraft.common.command;
 
+import com.williambl.kerbalcraft.KerbalCraft;
+import krpc.client.RPCException;
+import krpc.client.services.KRPC;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -8,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
 import javax.annotation.Nullable;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,12 +46,37 @@ public class CommandKerbalCraft extends CommandBase {
         String subCommand = args[0];
 
         if (subCommand.equals("connect")) {
-            //TODO: connect
+            if (args.length < 2) {
+                sender.sendMessage(new TextComponentString("No host specified."));
+                return;
+            }
+            InetAddress address;
+            try {
+                address = InetAddress.getByName(args[1]);
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+                sender.sendMessage(new TextComponentString("Unknown Host."));
+                return;
+            }
+
+            KRPC krpc = KerbalCraft.connectionManager.connect(address);
+            if (krpc != null) {
+                try {
+                    sender.sendMessage(new TextComponentString("Connected to" + args[1] + " running kRPC version " + krpc.getStatus().getVersion()));
+                    return;
+                } catch (RPCException e) {
+                    e.printStackTrace();
+                    sender.sendMessage(new TextComponentString("Connected, but something went wrong conencting again to tell you that it was connected. Try reconnecting."));
+                }
+            }
+
+            sender.sendMessage(new TextComponentString("Unable to connect."));
+
             return;
         }
 
         if (subCommand.equals("disconnect")) {
-            //TODO: disconnect
+            KerbalCraft.connectionManager.disconnect();
             return;
         }
 

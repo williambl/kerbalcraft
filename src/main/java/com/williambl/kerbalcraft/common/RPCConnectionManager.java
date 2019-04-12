@@ -27,6 +27,7 @@ public class RPCConnectionManager {
     }
 
     public KRPC connect(InetAddress address) {
+        disconnect();
         try {
             rpcConn = Connection.newInstance("main", address);
         } catch (IOException e) {
