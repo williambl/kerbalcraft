@@ -1,9 +1,7 @@
 package com.williambl.kerbalcraft;
 
 import com.williambl.kerbalcraft.common.CommonProxy;
-import krpc.client.Connection;
-import krpc.client.services.KRPC;
-import krpc.client.services.SpaceCenter;
+import com.williambl.kerbalcraft.common.RPCConnectionManager;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -24,9 +22,7 @@ public class KerbalCraft {
     @SidedProxy(clientSide="com.williambl.kerbalcraft.client.ClientProxy", serverSide="com.williambl.kerbalcraft.server.ServerProxy")
     public static CommonProxy proxy;
 
-    public static Connection rpcConn = null;
-    public static KRPC krpc = null;
-    public static SpaceCenter spaceCenter = null;
+	public static RPCConnectionManager connectionManager = new RPCConnectionManager();
 
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event)

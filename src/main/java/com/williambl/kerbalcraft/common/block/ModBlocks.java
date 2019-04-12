@@ -92,49 +92,49 @@ public class ModBlocks {
                     int power = worldIn.getStrongPower(pos);
                     if (power == 0) return;
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().activateNextStage();
                 }),
 
                 new BlockEffector("sas_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setSAS(power > 0);
                 }),
 
                 new BlockEffector("rcs_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setRCS(power > 0);
                 }),
 
                 new BlockEffector("gear_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setGear(power > 0);
                 }),
 
                 new BlockEffector("light_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setLights(power > 0);
                 }),
 
                 new BlockEffector("brake_activator", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setBrakes(power > 0);
                 }),
 
                 new BlockEffector("aborter", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setAbort(power > 0);
 
                 }),
@@ -142,49 +142,49 @@ public class ModBlocks {
                 new BlockEffector("throttle_setter", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setThrottle((float) power / 15);
                 }),
 
                 new BlockEffector("yaw_left_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setYaw(-((float) power / 15));
                 }),
 
                 new BlockEffector("yaw_right_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setYaw((float) power / 15);
                 }),
 
                 new BlockEffector("pitch_down_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setPitch(-((float) power / 15));
                 }),
 
                 new BlockEffector("pitch_up_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setPitch((float) power / 15);
                 }),
 
                 new BlockEffector("roll_left_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setRoll(-((float) power / 15));
                 }),
 
                 new BlockEffector("roll_right_steerer", (state, worldIn, pos, blockIn, fromPos) -> {
                     int power = worldIn.getStrongPower(pos);
 
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     vessel.getControl().setRoll((float) power / 15);
                 })
         };
@@ -194,7 +194,7 @@ public class ModBlocks {
             ACTION_GROUP_ACTIVATORS[i] = new BlockEffector("action_group_activator_" + i, (state, worldIn, pos, blockIn, fromPos) -> {
                 int power = worldIn.getStrongPower(pos);
 
-                SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                 vessel.getControl().setActionGroup(j, power > 0);
             });
             System.out.println(ACTION_GROUP_ACTIVATORS[i]);
@@ -207,72 +207,72 @@ public class ModBlocks {
     private static Block[] AddIndicators() {
         Block[] indicators = new Block[]{
                 new BlockIndicator("sas_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getControl().getSAS();
                 }),
 
                 new BlockIndicator("rcs_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getControl().getRCS();
                 }),
 
                 new BlockIndicator("gear_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getControl().getGear();
                 }),
 
                 new BlockIndicator("light_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getControl().getLights();
                 }),
 
                 new BlockIndicator("brake_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getControl().getBrakes();
                 }),
 
                 new BlockIndicator("comms_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getComms().getCanCommunicate();
                 }),
 
                 new BlockIndicator("orbit_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getSituation() == SpaceCenter.VesselSituation.ORBITING;
                 }),
 
                 new BlockIndicator("descending_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.flight(vessel.getReferenceFrame()).getVerticalSpeed() < 0;
                 }),
 
                 new BlockIndicator("liquidfuel_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getResources().amount("LiquidFuel") > 0;
                 }),
 
                 new BlockIndicator("oxidiser_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getResources().amount("Oxidiser") > 0;
                 }),
 
                 new BlockIndicator("monopropellant_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getResources().amount("MonoPropellant") > 0;
                 }),
 
                 new BlockIndicator("xenon_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getResources().amount("XenonGas") > 0;
                 }),
 
                 new BlockIndicator("solidfuel_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getResources().amount("SolidFuel") > 0;
                 }),
 
                 new BlockIndicator("electriccharge_indicator", (state, world, pos) -> {
-                    SpaceCenter.Vessel vessel = KerbalCraft.spaceCenter.getActiveVessel();
+                    SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
                     return vessel.getResources().amount("ElectricCharge") > 0;
                 }),
         };
