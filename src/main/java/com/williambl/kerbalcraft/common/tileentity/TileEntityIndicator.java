@@ -16,14 +16,23 @@ public class TileEntityIndicator extends TileEntity implements ITickable {
         iIndicator = iIndicatorIn;
     }
 
+    public TileEntityIndicator() {
+    }
+
     @Override
     public void update() {
         if (world.isRemote)
             return;
 
+        if (iIndicator == null) {
+            BlockIndicator block = (BlockIndicator) world.getBlockState(pos).getBlock();
+            iIndicator = block.iIndicator;
+        }
+
         IBlockState blockState = world.getBlockState(pos);
 
         BlockIndicator block = (BlockIndicator) (blockState.getBlock());
+
 
         boolean result = false;
         try {

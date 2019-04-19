@@ -301,6 +301,8 @@ public class ModBlocks {
             final IForgeRegistry<Block> registry = event.getRegistry();
 
             event.getRegistry().registerAll(AddBlocks());
+
+            registerTileEntities();
         }
 
         /**
