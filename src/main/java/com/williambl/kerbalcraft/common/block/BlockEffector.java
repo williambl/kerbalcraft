@@ -41,6 +41,7 @@ public class BlockEffector extends KCBlock {
                 iEffector.runRPC(state, worldIn, pos, blockIn, fromPos);
             } catch (RPCException e) {
                 e.printStackTrace();
+            } catch (NullPointerException ignored) {
             }
         }
     }
