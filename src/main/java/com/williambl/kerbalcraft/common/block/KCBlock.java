@@ -15,7 +15,7 @@ public class KCBlock extends Block {
         this.setHardness(3);
         this.setResistance(5);
         this.setRegistryName(registryName);
-        this.setUnlocalizedName(this.getRegistryName().toString());
+        this.setTranslationKey(this.getRegistryName().toString());
     }
 
     public void initModel() {

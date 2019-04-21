@@ -15,7 +15,7 @@ public class KerbalCraftTab extends CreativeTabs {
 
     @Nonnull
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(Item.getItemFromBlock(ModBlocks.STAGER));
     }
 
