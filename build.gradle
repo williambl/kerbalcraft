@@ -36,35 +36,6 @@ minecraft {
 repositories {
     mavenCentral()
 }
-
-dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // the 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
-    //provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // the deobf configurations:  'deobfCompile' and 'deobfProvided' are the same as the normal compile and provided,
-    // except that these dependencies get remapped to your current MCP mappings
-    //deobfCompile 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-    //deobfProvided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-    compile 'com.google.protobuf:protobuf-java:3.5.1'
-    compile 'org.javatuples:javatuples:1.2'
-    compile files('libs/krpc-java-0.4.3.jar')
-
-}
-
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
@@ -82,4 +53,57 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+configurations {
+    // Configuration that holds JARs to embed inside the mod JAR
+    embed
+    // Make embedded dependencies actually available during compilation/to IDEs
+    compile.extendsFrom embed
+}
+
+
+dependencies {
+    embed 'com.google.protobuf:protobuf-java:3.5.1'
+    embed 'org.javatuples:javatuples:1.2'
+    embed files('libs/krpc-java-0.4.3.jar')
+}
+
+
+// Custom task to generate the metadata files required for our dependencies
+task generateMetaFiles {
+    // Code for execution after the whole buildscript was parsed and loaded
+    doLast {
+        // Clear the dependencyMeta directory since we don't want old dependencies to still be listed in there
+        file("${buildDir}/dependencyMeta/").deleteDir()
+        configurations.embed.resolvedConfiguration.resolvedArtifacts.each {
+            // Create a meta file for each dependency in a specified directory
+            def metaFile = file("${buildDir}/dependencyMeta/${it.file.name}.meta")
+            metaFile.parentFile.mkdirs()
+            // Use the Gradle notation provided by the API ('group:artifact:version') for the meta file...
+            def artifactRef = it.moduleVersion.toString()
+            // ...and append the classifier if present
+            if (it.classifier != null) {
+                artifactRef += ":${it.classifier}"
+            }
+            // Write the artifact information to the meta file, to be used by the
+            metaFile.text = "Maven-Artifact: $artifactRef"
+        }
+    }
+}
+
+// Use the standard JAR task as container for the main jar and the contained dependencies (from the embed configuration)
+jar {
+    into('/') {
+        // Add all of the dependency JARs to the main JAR for later extraction
+        from configurations.embed
+        // Also include all dependency meta files
+        from "${buildDir}/dependencyMeta/"
+    }
+    manifest {
+        // The crucial manifest attribute: Make Forge extract the contained JARs
+        attributes 'ContainedDeps': configurations.embed.collect { it.name }.join(' ')
+    }
+    // Only run the main jar task after the meta files were built
+    dependsOn generateMetaFiles
 }
