@@ -8,8 +8,16 @@
     "uvlock": true
   },
   "variants": {
-    "inventory": [{}],
-    "powered=false": [{}],
-    "powered=true": [{}]
+    "normal": [
+      {}
+    ],
+    "powered": {
+      "true": {},
+      "false": {}
+    },
+    "inventory": [
+      {}
+    ]
   }
 }
+            
