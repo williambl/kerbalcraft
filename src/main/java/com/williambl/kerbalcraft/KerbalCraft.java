@@ -23,6 +23,7 @@ public class KerbalCraft {
     public static CommonProxy proxy;
 
 	public static RPCConnectionManager connectionManager = new RPCConnectionManager();
+	public static final KerbalCraftTab tab = new KerbalCraftTab();
 
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event)
