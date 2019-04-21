@@ -70,6 +70,12 @@ public class BlockIndicator extends KCTileEntityProviderBlock {
         return state.getValue(POWERED) ? 1 : 0;
     }
 
+    @SuppressWarnings("deprecation")
+    @Override
+    public int getLightValue(IBlockState state) {
+        return state.getValue(POWERED) ? 8 : 0;
+    }
+
     public void activate(World worldIn, BlockPos pos, IBlockState blockstate) {
         worldIn.setBlockState(pos, blockstate.withProperty(POWERED, Boolean.TRUE));
     }
