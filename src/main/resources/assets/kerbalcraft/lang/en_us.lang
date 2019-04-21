@@ -37,4 +37,4 @@ tile.kerbalcraft:xenon_indicator.name=Xenon Indicator
 tile.kerbalcraft:yaw_left_steerer.name=Yaw Left Steerer
 tile.kerbalcraft:yaw_right_steerer.name=Yaw Right steerer
 
-tabGroup.kerbalCraft=KerbalCraft
+itemGroup.kerbalcraft=KerbalCraft
