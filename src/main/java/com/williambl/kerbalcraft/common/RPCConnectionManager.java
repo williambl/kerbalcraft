@@ -50,4 +50,8 @@ public class RPCConnectionManager {
         krpc = null;
         rpcConn = null;
     }
+
+    public boolean isConnected() {
+        return krpc != null;
+    }
 }

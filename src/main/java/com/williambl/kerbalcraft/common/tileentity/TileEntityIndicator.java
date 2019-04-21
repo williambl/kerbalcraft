@@ -1,12 +1,12 @@
 package com.williambl.kerbalcraft.common.tileentity;
 
 import com.williambl.kerbalcraft.IIndicator;
+import com.williambl.kerbalcraft.KerbalCraft;
 import com.williambl.kerbalcraft.common.block.BlockIndicator;
 import krpc.client.RPCException;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.text.TextComponentString;
 
 public class TileEntityIndicator extends TileEntity implements ITickable {
 
@@ -30,6 +30,9 @@ public class TileEntityIndicator extends TileEntity implements ITickable {
             iIndicator = block.iIndicator;
         }
 
+        if (!KerbalCraft.connectionManager.isConnected())
+            return;
+
         IBlockState blockState = world.getBlockState(pos);
 
         BlockIndicator block = (BlockIndicator) (blockState.getBlock());
@@ -40,8 +43,6 @@ public class TileEntityIndicator extends TileEntity implements ITickable {
             result = iIndicator.runRPCGet(blockState, world, pos);
         } catch (RPCException e) {
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            world.getMinecraftServer().sendMessage(new TextComponentString("No kRPC connection!"));
         }
 
         if (result) {
