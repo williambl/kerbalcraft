@@ -397,6 +397,11 @@ public class ModBlocks {
             XENON_INDICATOR.initModel();
             SOLIDFUEL_INDICATOR.initModel();
             ELECTRICCHARGE_INDICATOR.initModel();
+
+            for (BlockEffector actionGroupActivator :
+                    ACTION_GROUP_ACTIVATORS) {
+                actionGroupActivator.initModel();
+            }
         }
 
         public static void registerTileEntities() {
