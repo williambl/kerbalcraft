@@ -241,10 +241,13 @@ public class ModBlocks {
                     return vessel.getSituation() == SpaceCenter.VesselSituation.ORBITING;
                 }),
 
-                new BlockIndicator("descending_indicator", (state, world, pos) -> {
+                /*new BlockIndicator("descending_indicator", (state, world, pos) -> {
                     SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
-                    return vessel.flight(vessel.getReferenceFrame()).getVerticalSpeed() < 0;
-                }),
+                    Drawing drawing = Drawing.newInstance(KerbalCraft.connectionManager.getRpcConn());
+                    drawing.addDirection(new Triplet<>(1.0, 0.0, 0.0), vessel.getSurfaceReferenceFrame(), 10, true);
+                    System.out.println(vessel.velocity(vessel.getSurfaceReferenceFrame()));
+                    return vessel.velocity(vessel.getSurfaceReferenceFrame()).getValue0() < 0;
+                }),*/
 
                 new BlockIndicator("liquidfuel_indicator", (state, world, pos) -> {
                     SpaceCenter.Vessel vessel = KerbalCraft.connectionManager.getSpaceCenter().getActiveVessel();
@@ -337,7 +340,7 @@ public class ModBlocks {
                     new ItemBlock(BRAKE_INDICATOR),
                     new ItemBlock(COMMS_INDICATOR),
                     new ItemBlock(ORBIT_INDICATOR),
-                    new ItemBlock(DESCENDING_INDICATOR),
+                    //new ItemBlock(DESCENDING_INDICATOR),
                     new ItemBlock(LIQUIDFUEL_INDICATOR),
                     new ItemBlock(OXIDISER_INDICATOR),
                     new ItemBlock(MONOPROPELLANT_INDICATOR),
@@ -390,7 +393,7 @@ public class ModBlocks {
             BRAKE_INDICATOR.initModel();
             COMMS_INDICATOR.initModel();
             ORBIT_INDICATOR.initModel();
-            DESCENDING_INDICATOR.initModel();
+            //DESCENDING_INDICATOR.initModel();
             LIQUIDFUEL_INDICATOR.initModel();
             OXIDISER_INDICATOR.initModel();
             MONOPROPELLANT_INDICATOR.initModel();
